@@ -164,3 +164,41 @@ body {
     50% { transform: translate(-40%, -60%) rotate(5deg); }
     100% { transform: translate(-50%, -50%) rotate(0deg); }
 }
+
+/* Add to the bottom of your CSS */
+body {
+    overflow: auto; /* Changed from hidden to auto */
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem 2rem;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 1rem; /* Add spacing between wrapped elements */
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap; /* Allow links to wrap */
+    flex: 1 1 auto; /* Allow flexible sizing */
+}
+
+/* Add media query for small screens */
+@media (max-width: 600px) {
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+    
+    .logo {
+        font-size: 1.2rem;
+    }
+}
