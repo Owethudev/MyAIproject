@@ -1,203 +1,224 @@
-:root {
-    --sky-blue: #87CEEB;
-    --dark-sky: #004080;
-    --neon-blue: #00FFFF;
-    --glow: #00BFFF;
-    --star-color: #00FFFF;
-}
-
+/* Base Styles */
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, var(--sky-blue), var(--dark-sky));
-    color: white;
-    position: relative;
-    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background: #ffffff; /* White background */
+    color: #333; /* Dark gray text */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
 }
 
+/* Navbar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #1b5e20; /* Dark green navbar */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    position: relative;
+}
+
+.nav-links a {
+    color: black;
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s ease;
+    padding-left: 20px;
+}
+
+.nav-links a:hover {
+    color: #a3e4a7; /* Light green hover */
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #1b5e20;
+    color: black;
+    display: none;
+    padding: 0.5rem 0;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+}
+
+.nav-links:hover .dropdown {
+    display: block;
+}
+
+.dropdown a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: black;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.dropdown a:hover {
+    color: #a3e4a7;
+}
+
+/* Centered Heading */
+h2 {
+    color: #000;
+    margin: 2rem 0 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0 1rem;
+}
+
+/* Content Layout */
+.content {
+    margin-top: 60px;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Review Form Styling */
+.review-form {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+/* Faint Green Underglow for Inputs */
+.review-form input,
+.review-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+    color: #333;
+    box-shadow: 0 2px 6px rgba(0, 128, 0, 0.1); /* Faint green underglow */
+}
+
+.review-form input:focus,
+.review-form textarea:focus {
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 128, 0, 0.2); /* Slightly stronger on focus */
+}
+
+/* Submit Button */
+.review-form button {
+    background: #a3e4a7; /* Light green */
+    color: #1b5e20;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.review-form button:hover {
+    background: #8fd18f; /* Darker green on hover */
+}
+
+/* Review Cards */
+.review-card {
+    background: white;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Star Rating Styling */
+.rating-stars {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.rating-stars span {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #ccc;
+    transition: color 0.2s ease;
+}
+
+.rating-stars span.selected {
+    color: #2e7d32; /* Dark green for selected stars */
+}
+
+/* Background Canvas */
 .background-canvas {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    pointer-events: none;
-    background: radial-gradient(ellipse at center, rgba(0,0,255,0.1) 0%, transparent 70%);
-}
-
-.navbar {
-    position: fixed;
-    top: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 1rem 2rem;
-    z-index: 10;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    backdrop-filter: blur(5px);
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(135deg, #f0fff0, #e0f7ff);
+    opacity: 0.9;
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--neon-blue);
-    text-shadow: 0 0 10px var(--glow);
-}
-
-.nav-links {
-    display: flex;
-    gap: 1.5rem;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-    text-shadow: 0 0 5px var(--neon-blue);
-}
-
-.nav-links a:hover {
-    color: var(--neon-blue);
-}
-
-.content {
-    margin-top: 60px;
-    padding: 2rem;
-    z-index: 1;
-    position: relative;
-}
-
-.page {
-    display: none;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-.page.active {
-    display: block;
-}
-
-.posts, .events {
-    margin-top: 2rem;
-    display: grid;
-    gap: 1rem;
-}
-
-.post-form, .event-form {
-    margin-bottom: 2rem;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 1rem;
-    border-radius: 12px;
-    border: 1px solid var(--neon-blue);
-}
-
-.post-form textarea, .event-form input, .event-form textarea {
-    width: 100%;
-    padding: 0.75rem;
-    margin: 0.5rem 0;
-    background: transparent;
-    border: 1px solid var(--neon-blue);
-    color: white;
-    border-radius: 6px;
-}
-
-.post-form button, .event-form button {
-    background: linear-gradient(45deg, var(--neon-blue), var(--sky-blue));
-    border: none;
-    padding: 0.75rem 1.5rem;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 0 10px var(--glow);
-    transition: transform 0.2s, box-shadow 0.3s;
-}
-
-.post-form button:hover, .event-form button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px var(--glow);
-}
-
-.post, .event {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 1rem;
-    border-radius: 12px;
-    border: 1px solid var(--neon-blue);
-    animation: float 10s infinite ease-in-out;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.profile-card {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid var(--neon-blue);
-    text-align: center;
-}
-
-/* Floating Words and Stars (same as before) */
-.float-word {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    color: var(--neon-blue);
-    text-shadow: 0 0 10px var(--glow);
-    animation: drift 10s infinite ease-in-out;
-    pointer-events: none;
-    z-index: 0;
-}
-
-@keyframes drift {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    50% { transform: translate(-40%, -60%) rotate(5deg); }
-    100% { transform: translate(-50%, -50%) rotate(0deg); }
-}
-
-body {
-    overflow: auto; /* Changed from hidden to auto */
-}
-
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 1rem 2rem;
-    z-index: 10;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    backdrop-filter: blur(5px);
-    flex-wrap: wrap; /* Allow wrapping on small screens */
-    gap: 1rem; /* Add spacing between wrapped elements */
-}
-
-.nav-links {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap; /* Allow links to wrap */
-    flex: 1 1 auto; /* Allow flexible sizing */
-}
-
-/* Add media query for small screens */
+/* Responsive Adjustments */
 @media (max-width: 600px) {
-    .nav-links a {
-        font-size: 0.9rem;
+    .navbar {
+        flex-direction: column;
+        padding: 0.75rem;
     }
-    
-    .logo {
-        font-size: 1.2rem;
+
+    .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .review-form {
+        padding: 1rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
     }
 }
+
+/* ... existing styles ... */
+
+/* Navbar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #1b5e20; /* Dark green navbar */
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo Styling */
+.logo {
+    font-size: 2rem; /* Bigger logo */
+    color: #000; /* Black text */
+    padding-left: 50px; /* Left padding */
+    font-weight: 600;
+}
+
+/* ... rest of the styles remain unchanged ... */
